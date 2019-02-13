@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrapper">
-    <div class="header-wrapper_blue-bg " />
-    <div class="header-wrapper_white-bg " />
+    <div class="header-wrapper__bg_blue" />
+    <div class="header-wrapper__bg_white" />
   </div>
 </template>
 
