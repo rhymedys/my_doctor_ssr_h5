@@ -44,6 +44,9 @@ module.exports = {
    */
   css: [],
 
+  env: {
+    PRODUCT_TYPE: process.env.PRODUCT_TYPE
+  },
   /*
    ** Plugins to load before mounting the App
    */

@@ -1,43 +1,52 @@
 <template>
   <div class="doctor-index">
-    <doctor-header />
+    <section v-if="computeShowContent">
+      <doctor-header :doctor-index-info="computeDoctorIndexInfo" />
+    </section>
   </div>
 </template>
 
 
 
 <script>
-import DoctorHeader from '@/components/doctor-header'
 export default {
   name: 'DoctorIndex',
   components: {
-    DoctorHeader
+    DoctorHeader: () => import('@/components/doctor-header')
   },
-  // asyncData(ctx) {
-  //   // 请检查您是否在服务器端
-  //   // 使用 req 和 res
-  //   const { app } = ctx
+  asyncData(ctx) {
+    const { app, query } = ctx
 
-  //   const { $requestApi } = app
-  //   // eslint-disable-next-line no-console
-  //   return $requestApi({
-  //     url: 'http://icanhazip.com'
-  //   })
-  //     .then(e => {
-  //       return { getDoctorIndexRes: e.data }
-  //     })
-  //     .catch(e => {
-  //       return {}
-  //     })
-  // },
+    const { $requestApiWithCookie } = app
+
+    return $requestApiWithCookie(ctx, {
+      url: 'doctor/getDoctorIndex',
+      params: query
+    })
+      .then(e => {
+        return { getDoctorIndexRes: e.data }
+      })
+      .catch(e => {
+        return {}
+      })
+  },
   data() {
     return {
       getDoctorIndexRes: undefined
     }
   },
-  created() {
-    // eslint-disable-next-line no-console
-    console.log(this._data)
+  computed: {
+    computeShowContent() {
+      return this.getDoctorIndexRes && this.getDoctorIndexRes.resultCode === 0
+    },
+    computeDoctorIndexInfo() {
+      return (
+        (this.getDoctorIndexRes &&
+          this.getDoctorIndexRes.data &&
+          this.getDoctorIndexRes.data.doctorIndexInfo) ||
+        {}
+      )
+    }
   }
 }
 </script>
