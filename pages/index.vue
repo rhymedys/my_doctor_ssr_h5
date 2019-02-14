@@ -3,21 +3,14 @@
     <div>
       <logo />
       <h1 class="title">
-        my-doctor-nuxt-ssr
+        welcome
       </h1>
       <h2 class="subtitle">
-        My groovy Nuxt.js project
+        Rhymedys's Home
       </h2>
       <div class="links">
         <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
+          href="https://github.com/rhymedys"
           target="_blank"
           class="button--grey"
         >

@@ -15,9 +15,7 @@
         class="doctor-index__patient-evalution"
         :show-empty="computeCommentItemIsEmpty"
       >
-        <comment-list
-          :list="computeDoctorIndexInfo.commentItemInfos"
-        />
+        <comment-list :list="computeDoctorIndexInfo.commentItemInfos" />
       </common-list-section>
     </section>
   </div>
@@ -37,29 +35,32 @@ export default {
   },
   async asyncData(ctx) {
     const { app, query } = ctx
-
     const { $requestApiWithCookie } = app
 
+    const startDate = new Date().getTime()
     const getDoctorIndexReq = $requestApiWithCookie(ctx, {
       url: 'doctor/getDoctorIndex',
       params: query
     }).catch(e => {
       return {}
     })
-
     const recommendProductsReq = $requestApiWithCookie(ctx, {
       url: 'product/recommendProducts',
       params: query
     }).catch(e => {
       return {}
     })
-
     const [getDoctorIndexRes, recommendProductsRes] = await Promise.all([
       getDoctorIndexReq,
       recommendProductsReq
     ])
 
+    // eslint-disable-next-line no-console
+    console.log('asyncData finish time:', new Date().getTime())
+    const endDate = new Date().getTime()
     return {
+      startDate,
+      endDate,
       getDoctorIndexRes: getDoctorIndexRes.data,
       recommendProductsRes: recommendProductsRes.data
     }
@@ -108,6 +109,12 @@ export default {
         !computeDoctorIndexInfo.commentItemInfos.length
       )
     }
+  },
+  created() {
+    // eslint-disable-next-line no-console
+    console.log('asyncData start time:', this.startDate)
+    // eslint-disable-next-line no-console
+    console.log('asyncData finish time:', this.endDate)
   }
 }
 </script>

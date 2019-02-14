@@ -22,8 +22,10 @@
 export default {
   name: 'CommonListSection',
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     title: String,
     isEmpty: Boolean,
+    // eslint-disable-next-line vue/require-default-prop
     emptyTxt: String,
     showEmpty: Boolean
   },
