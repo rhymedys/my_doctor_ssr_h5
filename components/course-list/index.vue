@@ -8,7 +8,7 @@
       <div class="course-list__item_left">
         <img
           width="80"
-          height="80"
+          height="60"
           :src="item.productCoverImg"
         >
       </div>
@@ -24,7 +24,7 @@
             {{ item.visitNum || '' }}
           </span>
           <span class="right__info_data">
-            {{ item.commentNum || '' }}
+            {{ item.commentNum || '0' }}
           </span>
         </div>
       </div>

@@ -6,15 +6,15 @@
         {{ title||'' }}
       </div>
     </div>
-    <slot>
-      <div
-        class="empty-content-wrapper"
-      >
-        <div class="empty-content-wrapper__txt">
-          {{ computeEmptyTxt }}
-        </div>
+    <slot />
+    <div
+      v-if="showEmpty"
+      class="empty-content-wrapper"
+    >
+      <div class="empty-content-wrapper__txt">
+        {{ computeEmptyTxt }}
       </div>
-    </slot>
+    </div>
   </div>
 </template>
 
@@ -24,7 +24,8 @@ export default {
   props: {
     title: String,
     isEmpty: Boolean,
-    emptyTxt: String
+    emptyTxt: String,
+    showEmpty: Boolean
   },
   computed: {
     computeEmptyTxt() {

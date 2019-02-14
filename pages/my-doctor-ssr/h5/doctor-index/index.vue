@@ -6,11 +6,19 @@
       <common-list-section
         :title="computeRecomandProductTitle"
         class="doctor-index__recomand-product-section"
-      />
+        :show-empty="!computeRecomandProduct.length"
+      >
+        <course-list :list="computeRecomandProduct" />
+      </common-list-section>
       <common-list-section
         title="患者评价"
         class="doctor-index__patient-evalution"
-      />
+        :show-empty="computeCommentItemIsEmpty"
+      >
+        <comment-list
+          :list="computeDoctorIndexInfo.commentItemInfos"
+        />
+      </common-list-section>
     </section>
   </div>
 </template>
@@ -23,9 +31,11 @@ export default {
   components: {
     DoctorHeader: () => import('@/components/doctor-header'),
     ServiceTable: () => import('@/components/service-table'),
-    CommonListSection: () => import('@/components/common-list-section')
+    CommonListSection: () => import('@/components/common-list-section'),
+    CourseList: () => import('@/components/course-list'),
+    CommentList: () => import('@/components/comment-list')
   },
-  asyncData(ctx) {
+  async asyncData(ctx) {
     const { app, query } = ctx
 
     const { $requestApiWithCookie } = app
@@ -33,19 +43,31 @@ export default {
     const getDoctorIndexReq = $requestApiWithCookie(ctx, {
       url: 'doctor/getDoctorIndex',
       params: query
+    }).catch(e => {
+      return {}
     })
-      .then(e => {
-        return { getDoctorIndexRes: e.data }
-      })
-      .catch(e => {
-        return {}
-      })
 
-    return Promise.all([getDoctorIndexReq])
+    const recommendProductsReq = $requestApiWithCookie(ctx, {
+      url: 'product/recommendProducts',
+      params: query
+    }).catch(e => {
+      return {}
+    })
+
+    const [getDoctorIndexRes, recommendProductsRes] = await Promise.all([
+      getDoctorIndexReq,
+      recommendProductsReq
+    ])
+
+    return {
+      getDoctorIndexRes: getDoctorIndexRes.data,
+      recommendProductsRes: recommendProductsRes.data
+    }
   },
   data() {
     return {
-      getDoctorIndexRes: undefined
+      getDoctorIndexRes: undefined,
+      recommendProductsRes: undefined
     }
   },
   computed: {
@@ -60,12 +82,31 @@ export default {
         {}
       )
     },
+    computeRecomandProduct() {
+      return (
+        (this.recommendProductsRes &&
+          this.recommendProductsRes.data &&
+          this.recommendProductsRes.data.productInfos) ||
+        []
+      )
+    },
     computeRecomandProductTitle() {
-      const res = '推荐课程'
+      let res = '推荐课程'
 
-      // if(this.computeDoctorIndexInfo.)
+      if (this.computeRecomandProduct.length) {
+        res += ` (${this.computeRecomandProduct.length}条)`
+      }
 
       return res
+    },
+
+    computeCommentItemIsEmpty() {
+      const { computeDoctorIndexInfo } = this
+
+      return (
+        !computeDoctorIndexInfo.commentItemInfos ||
+        !computeDoctorIndexInfo.commentItemInfos.length
+      )
     }
   }
 }
