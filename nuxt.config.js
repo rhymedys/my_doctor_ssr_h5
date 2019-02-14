@@ -23,11 +23,22 @@ module.exports = {
         content: pkg.description
       }
     ],
+    script: [
+      {
+        type: 'text/javascript',
+        src: `//at.alicdn.com/t/${pkg.iconFont}.js`,
+        defer: true,
+        async: true
+      }
+    ],
     link: [
       {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
+        href: `//at.alicdn.com`,
+        rel: 'dns-prefetch'
+      },
+      {
+        href: `//at.alicdn.com/t/${pkg.iconFont}.css`,
+        rel: 'stylesheet'
       }
     ]
   },
