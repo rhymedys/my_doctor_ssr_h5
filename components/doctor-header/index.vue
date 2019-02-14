@@ -8,7 +8,30 @@
           <div class="base-info__left">
             <span class="base-info__left_name">
               {{ computeDoctorInfo.doctorName || '' }}
+              <span class="presciption-logo">
+                处方
+              </span>
             </span>
+            <div class="base-info__left_desc">
+              {{ computeDoctorInfo.tenantDeptName||'' }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ computeDoctorInfo.doctorTitle||'' }}
+              <br>
+              {{ computeDoctorInfo.hospitalName||'' }}
+            </div>
+          </div>
+        </div>
+        <div class="other-info">
+          <div class="other-info__left">
+            擅长：{{ computeDoctorInfo.speciality||'' }}
+          </div>
+          <div class="other-info__right">
+            <span class="other-info__right_txt">
+              医生简介
+            </span>
+            <img
+              src="//mp.mhealth100.com//ip-healthmanager-mobile-web/mydoctor/static/img/iconNext@3x.c0cca17.png"
+              width="4"
+              height="8"
+            >
           </div>
         </div>
       </div>
@@ -45,20 +68,13 @@ export default {
   props: {
     doctorIndexInfo: {
       type: Object,
-      required: true,
-      default: function() {
-        return {}
-      }
+      required: true
     }
   },
   computed: {
     computeDoctorInfo() {
       return (this.doctorIndexInfo && this.doctorIndexInfo.doctorInfo) || {}
     }
-  },
-  created() {
-    // eslint-disable-next-line no-console
-    console.log(this, this.computeDoctorInfo)
   }
 }
 </script>
