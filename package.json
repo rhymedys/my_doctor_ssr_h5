@@ -21,8 +21,9 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/pwa": "^2.6.0",
+    "@nuxtjs/pwa": "^3.0.0-beta.6",
     "@nuxtjs/style-resources": "^0.1.2",
+    "@nuxtjs/workbox": "^3.0.0-beta.6",
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "less": "^3.9.0",

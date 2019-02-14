@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _2ca60796 = () => interopDefault(import('..\\pages\\doctor-index\\index.vue' /* webpackChunkName: "pages_doctor-index_index" */))
+const _9e9c9276 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-index\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-index_index" */))
 const _316a01ce = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 Vue.use(Router)
@@ -66,9 +66,9 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
-      path: "/doctor-index",
-      component: _2ca60796,
-      name: "doctor-index"
+      path: "/my-doctor-ssr/h5/doctor-index",
+      component: _9e9c9276,
+      name: "my-doctor-ssr-h5-doctor-index"
     }, {
       path: "/",
       component: _316a01ce,

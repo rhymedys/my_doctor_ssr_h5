@@ -10,6 +10,7 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
+import nuxt_plugin_swregister_719d8582 from 'nuxt_plugin_swregister_719d8582' // Source: ./sw.register.js (mode: 'client')
 import nuxt_plugin_nuxticons_4a24638f from 'nuxt_plugin_nuxticons_4a24638f' // Source: ./nuxt-icons.js (mode: 'all')
 import nuxt_plugin_axios_2baf3559 from 'nuxt_plugin_axios_2baf3559' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_request_735f5dfc from 'nuxt_plugin_request_735f5dfc' // Source: ..\\plugins\\request.js (mode: 'all')
@@ -133,6 +134,10 @@ async function createApp(ssrContext) {
   if (typeof nuxt_plugin_nuxticons_4a24638f === 'function') await nuxt_plugin_nuxticons_4a24638f(app.context, inject)
   if (typeof nuxt_plugin_axios_2baf3559 === 'function') await nuxt_plugin_axios_2baf3559(app.context, inject)
   if (typeof nuxt_plugin_request_735f5dfc === 'function') await nuxt_plugin_request_735f5dfc(app.context, inject)
+
+  if (process.client) {
+    if (typeof nuxt_plugin_swregister_719d8582 === 'function') await nuxt_plugin_swregister_719d8582(app.context, inject)
+  }
 
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {

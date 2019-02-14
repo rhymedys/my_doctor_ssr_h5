@@ -52,4 +52,8 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+body {
+  background-color: #f3f3f3;
+}
 </style>
