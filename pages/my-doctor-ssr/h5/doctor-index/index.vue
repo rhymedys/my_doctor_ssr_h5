@@ -38,8 +38,6 @@ export default {
   },
   async asyncData(ctx) {
     const { app, query } = ctx
-    // eslint-disable-next-line no-console
-    console.log(ctx)
     const { $requestApiWithCookie, $checkSessionIsOverdue } = app
 
     const startDate = new Date().getTime()
@@ -59,9 +57,6 @@ export default {
       getDoctorIndexReq,
       recommendProductsReq
     ])
-
-    // eslint-disable-next-line no-console
-    console.log(getDoctorIndexRes, recommendProductsRes)
 
     $checkSessionIsOverdue(ctx, getDoctorIndexRes.data)
     $checkSessionIsOverdue(ctx, recommendProductsRes.data)
@@ -134,21 +129,12 @@ export default {
   // },
   methods: {
     onTagClick() {
-      // eslint-disable-next-line no-console
-      console.log(this)
-
       this.$pushRouter({
         name: 'doctor-introduce',
         query: {
           doctorOpenId: this.$getRouteQuery('doctorOpenId')
         }
       })
-      // this.$router.push({
-      //   name: 'doctor-introduce',
-      //   query: {
-      //     doctorOpenId
-      //   }
-      // })
     }
   }
 }

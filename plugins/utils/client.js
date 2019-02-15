@@ -2,7 +2,7 @@
  * @Author: Rhymedys/Rhymedys@gmail.com
  * @Date: 2019-02-15 14:20:29
  * @Last Modified by: Rhymedys
- * @Last Modified time: 2019-02-15 17:40:29
+ * @Last Modified time: 2019-02-15 21:41:55
  */
 
 import Vue from 'vue'
@@ -38,7 +38,6 @@ const api = {
     }
 
     this.$router.push(res)
-    // console.log(this.$getRouteQuery())
   }
 }
 

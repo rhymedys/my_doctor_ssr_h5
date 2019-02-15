@@ -2,7 +2,7 @@
  * @Author: Rhymedys/Rhymedys@gmail.com
  * @Date: 2019-02-15 17:39:23
  * @Last Modified by: Rhymedys
- * @Last Modified time: 2019-02-15 21:39:35
+ * @Last Modified time: 2019-02-15 21:41:26
  */
 
 import Vue from 'vue'
@@ -20,7 +20,6 @@ const api = {
 
     if (resultCode === 410001) {
       let redirectUri
-
       if (process.server) {
         redirectUri = `http://${
           ctx.isDev ? 'localhost:3333' : '120.79.205.36:3001'
