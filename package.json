@@ -1,8 +1,8 @@
 {
   "name": "my-doctor-nuxt-ssr",
   "version": "1.0.0",
-  "description": "My groovy Nuxt.js project",
-  "author": "Rhymedys_",
+  "description": "My my-doctor-nuxt-ssr h5 project",
+  "author": "rhymedys",
   "private": true,
   "config": {
     "nuxt": {
