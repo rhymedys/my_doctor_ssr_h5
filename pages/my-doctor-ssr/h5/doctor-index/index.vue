@@ -38,7 +38,9 @@ export default {
   },
   async asyncData(ctx) {
     const { app, query } = ctx
-    const { $requestApiWithCookie } = app
+    // eslint-disable-next-line no-console
+    console.log(ctx)
+    const { $requestApiWithCookie, $checkSessionIsOverdue } = app
 
     const startDate = new Date().getTime()
     const getDoctorIndexReq = $requestApiWithCookie(ctx, {
@@ -57,6 +59,9 @@ export default {
       getDoctorIndexReq,
       recommendProductsReq
     ])
+
+    $checkSessionIsOverdue(ctx, getDoctorIndexRes.data)
+    $checkSessionIsOverdue(ctx, recommendProductsRes.data)
 
     // eslint-disable-next-line no-console
     console.log('asyncData finish time:', new Date().getTime())
@@ -114,10 +119,15 @@ export default {
     }
   },
   created() {
-    // eslint-disable-next-line no-console
-    console.log('asyncData start time:', this.startDate)
-    // eslint-disable-next-line no-console
-    console.log('asyncData finish time:', this.endDate)
+    if (
+      (!process.isServer && this.getDoctorIndexRes.resultCode === 410001) ||
+      this.recommendProductsRes.resultCode === 410001
+    ) {
+      const redirectUri = encodeURIComponent(window.location.href)
+      window.location.replace(
+        `http://120.79.205.36:3001/my-doctor-ssr/login?redirect_uri=${redirectUri}`
+      )
+    }
   },
   methods: {
     onTagClick() {

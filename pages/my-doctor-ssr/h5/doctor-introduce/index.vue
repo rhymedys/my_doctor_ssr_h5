@@ -68,7 +68,8 @@ export default {
   },
   async asyncData(ctx) {
     const { app, query } = ctx
-    const { $requestApiWithCookie } = app
+
+    const { $requestApiWithCookie, $checkSessionIsOverdue } = app
 
     const res = await $requestApiWithCookie(ctx, {
       url: 'doctor/getDoctorDetail',
@@ -76,6 +77,8 @@ export default {
     }).catch(e => {
       return {}
     })
+
+    $checkSessionIsOverdue(ctx, res.data)
 
     return {
       getDoctorDetailRes: res.data
@@ -96,6 +99,14 @@ export default {
           this.getDoctorDetailRes.data &&
           this.getDoctorDetailRes.data.data) ||
         {}
+      )
+    }
+  },
+  created() {
+    if (!process.isServer && this.getDoctorDetailRes.resultCode === 410001) {
+      const redirectUri = encodeURIComponent(window.location.href)
+      window.location.replace(
+        `http://120.79.205.36:3001/my-doctor-ssr/login?redirect_uri=${redirectUri}`
       )
     }
   },
