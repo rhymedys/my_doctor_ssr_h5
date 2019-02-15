@@ -20,9 +20,12 @@
           v-if="showVisitInfo"
           class="right__info"
         >
+          <i class="Patient browse right__info_browse" />
           <span class="right__info_data">
             {{ item.visitNum || '' }}
           </span>
+
+          <i class="Patient comment  right__info_comment " />
           <span class="right__info_data">
             {{ item.commentNum || '0' }}
           </span>

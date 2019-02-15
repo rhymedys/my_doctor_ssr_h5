@@ -18,6 +18,16 @@
               {{ computeDoctorInfo.hospitalName||'' }}
             </div>
           </div>
+          <avatar
+            :avatar="computeDoctorInfo.doctorAvatar ||''"
+            :width="60"
+            :platfrom="computeDoctorInfo.avatarSource || '' "
+            :gender="computeDoctorInfo.gender||''"
+            :v-top="57"
+            :v-right="16"
+            :show-verified="true"
+            class="base-info__right"
+          />
         </div>
         <div class="other-info">
           <div class="other-info__left">
@@ -63,8 +73,12 @@
 </template>
 
 <script>
+import avatar from '@/components/avatar'
 export default {
   name: 'DoctorHeader',
+  components: {
+    Avatar: avatar
+  },
   props: {
     doctorIndexInfo: {
       type: Object,

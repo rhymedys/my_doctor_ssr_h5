@@ -16,6 +16,14 @@
         <div class="item__foot_date">
           {{ getCommentDateProxy(item.commentDate) ||'' }}
         </div>
+        <div class="item__foot_rate">
+          <img
+            v-for="i of 5"
+            :key="i"
+            :src="i<item.commentStar?'//mp.mhealth100.com/ip-healthmanager-mobile-web/mydoctor/static/img/icon_star_highlight@2x.d5e9033.png':'//mp.mhealth100.com/ip-healthmanager-mobile-web/mydoctor/static/img/iconStarNormal@2x.6b56b45.png'"
+            width="13"
+          >
+        </div>
       </div>
     </div>
   </div>

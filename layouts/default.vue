@@ -18,6 +18,22 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  line-height: normal;
+}
+
+body {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #000;
+  width: 100%;
+  background-color: #f3f3f3;
+  background: #f3f3f3;
+  height: 100%;
+  word-wrap: break-word;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  padding-bottom: constant(safe-area-inset-bottom);
 }
 
 *,

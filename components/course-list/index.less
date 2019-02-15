@@ -45,26 +45,35 @@
         /*! autoprefixer: off */
         -webkit-line-clamp: 2;
         color: #222;
-        span{
+
+        span {
           word-break: break-all;
           word-wrap: break-word;
-          font-size: .75rem!important;
+          font-size: .75rem !important;
           color: #222;
         }
       }
 
-      .right__info{
+      .right__info {
         display: flex;
         flex-direction: row;
-        margin-top: .3rem!important;
-        &_data{
+        margin-top: .3rem !important;
+        align-items: center;
 
-          vertical-align: middle;
+        &_comment,
+        &_browse {
+          line-height: 1;
+          color: rgb(170, 170, 170);
+          font-size: .65rem !important;
+          height: 100%;
+        }
+
+        &_data {
           color: #aaa;
-          margin-left: .15rem!important;
-          margin-right: .6rem!important;
+          margin-left: .15rem !important;
+          margin-right: .6rem !important;
           display: block;
-          font-size: .6rem!important;
+          font-size: .6rem !important;
         }
       }
     }

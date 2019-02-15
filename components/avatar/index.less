@@ -1,0 +1,33 @@
+.avatar {
+  &__wrapper {
+    position: relative !important;
+    overflow: hidden;
+    border-radius: 5rem;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin:0;
+
+    &_border:before {
+      content: " ";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200%;
+      height: .05rem;
+      border: .05rem solid #e5e5e5;
+      color: #e5e5e5;
+      height: 200%;
+      transform-origin: left top;
+      transform: scale(.5);
+      border: .05rem solid #f2f2f2;
+      box-sizing: border-box;
+      border-radius: 50%;
+    }
+  }
+
+
+  &_vertify{
+    position: absolute;
+  }
+
+}
