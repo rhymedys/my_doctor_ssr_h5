@@ -60,6 +60,9 @@ export default {
       recommendProductsReq
     ])
 
+    // eslint-disable-next-line no-console
+    console.log(getDoctorIndexRes, recommendProductsRes)
+
     $checkSessionIsOverdue(ctx, getDoctorIndexRes.data)
     $checkSessionIsOverdue(ctx, recommendProductsRes.data)
 
@@ -118,17 +121,17 @@ export default {
       )
     }
   },
-  created() {
-    if (
-      (!process.isServer && this.getDoctorIndexRes.resultCode === 410001) ||
-      this.recommendProductsRes.resultCode === 410001
-    ) {
-      const redirectUri = encodeURIComponent(window.location.href)
-      window.location.replace(
-        `http://120.79.205.36:3001/my-doctor-ssr/login?redirect_uri=${redirectUri}`
-      )
-    }
-  },
+  // created() {
+  //   if (
+  //     (!process.isServer && this.getDoctorIndexRes.resultCode === 410001) ||
+  //     this.recommendProductsRes.resultCode === 410001
+  //   ) {
+  //     const redirectUri = encodeURIComponent(window.location.href)
+  //     window.location.replace(
+  //       `http://120.79.205.36:3001/my-doctor-ssr/login?redirect_uri=${redirectUri}`
+  //     )
+  //   }
+  // },
   methods: {
     onTagClick() {
       // eslint-disable-next-line no-console
