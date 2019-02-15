@@ -34,7 +34,10 @@
             擅长：{{ computeDoctorInfo.speciality||'' }}
           </div>
           <div class="other-info__right">
-            <span class="other-info__right_txt">
+            <span
+              class="other-info__right_txt"
+              @click="$emit('onTagClick')"
+            >
               医生简介
             </span>
             <img

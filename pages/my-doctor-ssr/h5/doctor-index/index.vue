@@ -1,7 +1,10 @@
 <template>
   <div class="doctor-index">
     <section v-if="computeShowContent">
-      <doctor-header :doctor-index-info="computeDoctorIndexInfo" />
+      <doctor-header
+        :doctor-index-info="computeDoctorIndexInfo"
+        @onTagClick="onTagClick"
+      />
       <service-table :doctor-services-infos="computeDoctorIndexInfo.doctorServicesInfos" />
       <common-list-section
         :title="computeRecomandProductTitle"
@@ -115,6 +118,25 @@ export default {
     console.log('asyncData start time:', this.startDate)
     // eslint-disable-next-line no-console
     console.log('asyncData finish time:', this.endDate)
+  },
+  methods: {
+    onTagClick() {
+      // eslint-disable-next-line no-console
+      console.log(this)
+
+      this.$pushRouter({
+        name: 'doctor-introduce',
+        query: {
+          doctorOpenId: this.$getRouteQuery('doctorOpenId')
+        }
+      })
+      // this.$router.push({
+      //   name: 'doctor-introduce',
+      //   query: {
+      //     doctorOpenId
+      //   }
+      // })
+    }
   }
 }
 </script>

@@ -1,0 +1,37 @@
+.doctor-introduce {
+  background-color: #f3f3f3;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__auth-info {
+    margin-top: 10px;
+  }
+
+  &__auth-info_br-bottom,
+  &__doctor-info-item_br-bottom {
+    position: relative;
+
+    &:after {
+      bottom: 0;
+      border-bottom: .05rem solid #e5e5e5;
+      transform-origin: 0 100%;
+      transform: scaleY(.5);
+      content: " ";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: .05rem;
+      color: #e5e5e5;
+    }
+  }
+
+  &__water-icon{
+    position: absolute;
+    top: 7.6%;
+    right: 20.5%;
+    max-height: 130px;
+    max-width: 130px;
+  }
+}

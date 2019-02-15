@@ -1,6 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
+  loading: '@/components/loading/index.vue',
   mode: 'universal',
 
   /*
@@ -43,12 +44,12 @@ module.exports = {
     ]
   },
 
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: {
-    color: '#fff'
-  },
+  // /*
+  //  ** Customize the progress-bar color
+  //  */
+  // loading: {
+  //   color: '#fff'
+  // },
 
   /*
    ** Global CSS
@@ -61,7 +62,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/request.js'],
+  plugins: ['@/plugins/utils/client.js', '@/plugins/request.js'],
 
   /*
    ** Nuxt.js modules

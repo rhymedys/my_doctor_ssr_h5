@@ -1,0 +1,41 @@
+.doctor-info-item{
+  padding: 15px 12px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &_col{
+    justify-content: initial;
+    flex-direction: column;
+  }
+
+  &__left{
+    min-width: 3rem;
+    width: 3rem;
+    max-width: 3rem;
+    margin-right: 2.5rem;
+    font-size: .75rem!important;
+    flex: 1;
+    color: #222;
+  }
+
+  &__right{
+    font-size: .7rem!important;
+
+    &_col{
+      margin-top: 10px;
+    }
+
+    &_row{
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #222;
+      /*! autoprefixer: off */
+      -webkit-line-clamp: 1;
+    }
+  }
+
+}
