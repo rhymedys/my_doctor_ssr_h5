@@ -1,38 +1,33 @@
 <template>
   <div
-    class="doctor-chat-service"
+    class="doctor-phone-service"
   >
     <section v-if="computeShowContent">
       <doctor-simple-header
-        :doctor-index-info="computeDoctorIndexInfo"
+        :doctor-index-info="computeDoctorIndexInfo.doctorInfo"
         @onTagClick="onTagClick"
       >
         <template slot="preview-info">
-          <div class="doctor-chat-service__preview-data-item">
+          <div class="doctor-phone-service__preview-data-item">
             {{ computeDoctorIndexInfo.consultCount || '0' }}
             <br>
             <span>咨询数</span>
           </div>
-          <div class="doctor-chat-service__preview-data-item">
+          <div class="doctor-phone-service__preview-data-item">
             {{ computeDoctorIndexInfo.goodFeedbackRate? Number(computeDoctorIndexInfo.goodFeedbackRate) * 20: '0' }}%
             <br>
             <span>好评率</span>
           </div>
-          <div class="doctor-chat-service__preview-data-item">
-            {{ computeDoctorIndexInfo.replyRate || '0' }}%
-            <br>
-            <span>回复率</span>
-          </div>
         </template>
       </doctor-simple-header>
       <service-introduce
-        :sevice-info="computeDoctorIndexInfo"
+        :sevice-info="computeDoctorIndexInfo.serviceInfo"
       />
       <common-list-section
         title="咨询规则"
-        class="doctor-chat-service__common-section"
+        class="doctor-phone-service__common-section"
       >
-        <div class="doctor-chat-service__rule-wrapper">
+        <div class="doctor-phone-service__rule-wrapper">
           <div
             v-for="item of computeChatRules"
             :key="item"
@@ -43,7 +38,7 @@
       </common-list-section>
       <common-list-section
         title="咨询评价"
-        class="doctor-chat-service__common-section"
+        class="doctor-phone-service__common-section"
         :show-empty="computeCommentItemIsEmpty"
       >
         <comment-list :list="computeDoctorIndexInfo.commentItemInfos" />
@@ -67,35 +62,35 @@ export default {
 
     const { $requestApiWithCookie, $checkSessionIsOverdue } = app
 
-    const getDoctorConsltIndexRes = await $requestApiWithCookie(ctx, {
-      url: 'doctor/getDoctorConsltIndex',
-      params: query
+    const phoneConsultIndex = await $requestApiWithCookie(ctx, {
+      url: 'phoneConsult/index',
+      params: Object.assign(query, {
+        serviceId: query.servceId
+      })
     }).catch(e => {
       return {}
     })
 
-    $checkSessionIsOverdue(ctx, getDoctorConsltIndexRes.data)
+    $checkSessionIsOverdue(ctx, phoneConsultIndex.data)
 
     return {
-      getDoctorConsltIndex: getDoctorConsltIndexRes.data
+      phoneConsultIndex: phoneConsultIndex.data
     }
   },
   data() {
     return {
-      getDoctorConsltIndex: undefined
+      phoneConsultIndex: undefined
     }
   },
   computed: {
     computeShowContent() {
-      return (
-        this.getDoctorConsltIndex && this.getDoctorConsltIndex.resultCode === 0
-      )
+      return this.phoneConsultIndex && this.phoneConsultIndex.resultCode === 0
     },
     computeDoctorIndexInfo() {
       return (
-        (this.getDoctorConsltIndex &&
-          this.getDoctorConsltIndex.data &&
-          this.getDoctorConsltIndex.data.doctorConsultIndexInfo) ||
+        (this.phoneConsultIndex &&
+          this.phoneConsultIndex.data &&
+          this.phoneConsultIndex.data.doctorPhoneConsultIndexInfo) ||
         {}
       )
     },
@@ -110,8 +105,12 @@ export default {
     computeChatRules() {
       const { computeDoctorIndexInfo } = this
       let rules = []
-      if (computeDoctorIndexInfo.consultRule) {
-        rules = computeDoctorIndexInfo.consultRule.split('<br>')
+      let serviceRule
+      if (
+        (serviceRule = computeDoctorIndexInfo.serviceInfo) &&
+        (serviceRule = serviceRule.serviceRule)
+      ) {
+        rules = serviceRule.split('<br>')
         if (rules) {
           rules = rules.map(val => {
             return val.replace('\n', '')

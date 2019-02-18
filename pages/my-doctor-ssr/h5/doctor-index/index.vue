@@ -30,7 +30,11 @@
 
 
 <script>
-import { voiceConsultId, imgTextConsultId } from '@/constants/serviceType'
+import {
+  voiceConsultId,
+  imgTextConsultId,
+  phoneConsultId
+} from '@/constants/serviceType'
 export default {
   name: 'DoctorIndex',
   components: {
@@ -129,7 +133,11 @@ export default {
         }
       })
     },
-    onServiceClick({ servceId }) {
+    onServiceClick({ servceId, isValid }) {
+      if (!isValid) {
+        return
+      }
+
       let route = ''
       const query = {}
 
@@ -141,6 +149,10 @@ export default {
         case imgTextConsultId:
           route = 'doctor-chat-service'
           query.servceId = imgTextConsultId
+          break
+        case phoneConsultId:
+          route = 'doctor-phone-service'
+          query.servceId = phoneConsultId
           break
       }
 
