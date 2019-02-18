@@ -30,7 +30,7 @@
 
 
 <script>
-import { voiceConsultId } from '@/constants/serviceType'
+import { voiceConsultId, imgTextConsultId } from '@/constants/serviceType'
 export default {
   name: 'DoctorIndex',
   components: {
@@ -137,6 +137,10 @@ export default {
         case voiceConsultId:
           route = 'doctor-famous-course'
           query.servceId = servceId
+          break
+        case imgTextConsultId:
+          route = 'doctor-chat-service'
+          query.servceId = imgTextConsultId
           break
       }
 

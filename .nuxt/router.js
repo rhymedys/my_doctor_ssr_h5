@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
+const _474d55c6 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-chat-service\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-chat-service_index" */))
 const _1e78148a = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-famous-course\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-famous-course_index" */))
 const _9e9c9276 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-index\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-index_index" */))
 const _a67b5450 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-introduce\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-introduce_index" */))
@@ -68,6 +69,10 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
+      path: "/my-doctor-ssr/h5/doctor-chat-service",
+      component: _474d55c6,
+      name: "my-doctor-ssr-h5-doctor-chat-service"
+    }, {
       path: "/my-doctor-ssr/h5/doctor-famous-course",
       component: _1e78148a,
       name: "my-doctor-ssr-h5-doctor-famous-course"
