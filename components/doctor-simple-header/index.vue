@@ -7,22 +7,22 @@
         <div class="base-info">
           <div class="base-info__left">
             <span class="base-info__left_name">
-              {{ computeDoctorInfo.doctorName || '' }}
+              {{ doctorIndexInfo.doctorName || '' }}
               <span class="presciption-logo">
                 处方
               </span>
             </span>
             <div class="base-info__left_desc">
-              {{ computeDoctorInfo.tenantDeptName||'' }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ computeDoctorInfo.doctorTitle||'' }}
+              {{ doctorIndexInfo.tenantDeptName||'' }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ doctorIndexInfo.doctorTitle||'' }}
               <br>
-              {{ computeDoctorInfo.hospitalName||'' }}
+              {{ doctorIndexInfo.hospitalName||'' }}
             </div>
           </div>
           <avatar
-            :avatar="computeDoctorInfo.doctorAvatar ||''"
+            :avatar="doctorIndexInfo.doctorAvatar ||''"
             :width="60"
-            :platfrom="computeDoctorInfo.avatarSource || ''"
-            :gender="computeDoctorInfo.gender||''"
+            :platfrom="doctorIndexInfo.avatarSource || ''"
+            :gender="doctorIndexInfo.gender||''"
             :v-top="57"
             :v-right="16"
             :show-verified="true"
@@ -31,14 +31,14 @@
         </div>
         <div class="other-info">
           <div class="other-info__left">
-            擅长：{{ computeDoctorInfo.speciality||'' }}
+            <slot name="preview-info" />
           </div>
           <div class="other-info__right">
             <span
               class="other-info__right_txt"
               @click="$emit('onTagClick')"
             >
-              医生简介
+              返回主页
             </span>
             <img
               src="//mp.mhealth100.com//ip-healthmanager-mobile-web/mydoctor/static/img/iconNext@3x.c0cca17.png"
@@ -46,29 +46,6 @@
               height="8"
             >
           </div>
-        </div>
-      </div>
-      <div class="content__evelution">
-        <div class="evelution-wrapper">
-          {{ doctorIndexInfo.goodFeedbackRate||'5.0' }}
-          <br>
-          <span class="evelution-wrapper__desc">
-            评价星级
-          </span>
-        </div>
-        <div class="evelution-wrapper">
-          {{ doctorIndexInfo.fansNum|| 0 }}
-          <br>
-          <span class="evelution-wrapper__desc">
-            粉丝数
-          </span>
-        </div>
-        <div class="evelution-wrapper">
-          {{ doctorIndexInfo.replyCount||0 }}
-          <br>
-          <span class="evelution-wrapper__desc">
-            咨询数
-          </span>
         </div>
       </div>
     </div>
@@ -86,11 +63,6 @@ export default {
     doctorIndexInfo: {
       type: Object,
       required: true
-    }
-  },
-  computed: {
-    computeDoctorInfo() {
-      return (this.doctorIndexInfo && this.doctorIndexInfo.doctorInfo) || {}
     }
   }
 }

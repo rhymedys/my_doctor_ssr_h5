@@ -1,0 +1,30 @@
+.service-introduce{
+  height: 68px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &_logo{
+    padding-left: 15px;
+    padding-right: 13px;
+    height: 38px;
+  }
+  &__desc{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    color: #222222;
+    >span{
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background-color: white;
+      font-size: .6rem!important;
+      /*! autoprefixer: off */
+      -webkit-line-clamp: 1 ;
+      color: #666;
+      margin-top: .2rem!important;
+    }
+  }
+}

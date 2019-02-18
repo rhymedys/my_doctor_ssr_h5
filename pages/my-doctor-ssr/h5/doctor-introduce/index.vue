@@ -102,14 +102,7 @@ export default {
       )
     }
   },
-  // created() {
-  //   if (!process.isServer && this.getDoctorDetailRes.resultCode === 410001) {
-  //     const redirectUri = encodeURIComponent(window.location.href)
-  //     window.location.replace(
-  //       `http://120.79.205.36:3001/my-doctor-ssr/login?redirect_uri=${redirectUri}`
-  //     )
-  //   }
-  // },
+
   beforeDestroy() {
     // eslint-disable-next-line no-console
     console.log('DoctorIntroduce beforeDestroy')

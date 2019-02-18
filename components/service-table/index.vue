@@ -1,7 +1,12 @@
 <template>
   <div class="service-table">
     <div class="service-wrapper">
-      <div v-for="item of doctorServicesInfos" :key="item.servceId" class="service-wrapper__item">
+      <div
+        v-for="item of doctorServicesInfos"
+        :key="item.servceId"
+        class="service-wrapper__item"
+        @click="$emit('on-click',item)"
+      >
         <img height="40" width="40" :src="item.iconUrl">
         <div class="service-wrapper__item_desc">
           <div

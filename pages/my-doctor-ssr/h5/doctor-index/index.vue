@@ -5,7 +5,10 @@
         :doctor-index-info="computeDoctorIndexInfo"
         @onTagClick="onTagClick"
       />
-      <service-table :doctor-services-infos="computeDoctorIndexInfo.doctorServicesInfos" />
+      <service-table
+        :doctor-services-infos="computeDoctorIndexInfo.doctorServicesInfos"
+        @on-click="onServiceClick"
+      />
       <common-list-section
         :title="computeRecomandProductTitle"
         class="doctor-index__recomand-product-section"
@@ -27,6 +30,7 @@
 
 
 <script>
+import { voiceConsultId } from '@/constants/serviceType'
 export default {
   name: 'DoctorIndex',
   components: {
@@ -116,17 +120,6 @@ export default {
       )
     }
   },
-  // created() {
-  //   if (
-  //     (!process.isServer && this.getDoctorIndexRes.resultCode === 410001) ||
-  //     this.recommendProductsRes.resultCode === 410001
-  //   ) {
-  //     const redirectUri = encodeURIComponent(window.location.href)
-  //     window.location.replace(
-  //       `http://120.79.205.36:3001/my-doctor-ssr/login?redirect_uri=${redirectUri}`
-  //     )
-  //   }
-  // },
   methods: {
     onTagClick() {
       this.$pushRouter({
@@ -135,6 +128,27 @@ export default {
           doctorOpenId: this.$getRouteQuery('doctorOpenId')
         }
       })
+    },
+    onServiceClick({ servceId }) {
+      let route = ''
+      const query = {}
+
+      switch (servceId) {
+        case voiceConsultId:
+          route = 'doctor-famous-course'
+          query.servceId = servceId
+          break
+      }
+
+      if (route) {
+        this.$pushRouter({
+          name: route,
+          query: {
+            doctorOpenId: this.$getRouteQuery('doctorOpenId'),
+            ...query
+          }
+        })
+      }
     }
   }
 }
