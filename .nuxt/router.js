@@ -7,6 +7,7 @@ const _1e78148a = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doc
 const _9e9c9276 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-index\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-index_index" */))
 const _a67b5450 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-introduce\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-introduce_index" */))
 const _6325627e = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\doctor-phone-service\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_doctor-phone-service_index" */))
+const _6a5ba3b5 = () => interopDefault(import('..\\pages\\my-doctor-ssr\\h5\\focus-doctor\\index.vue' /* webpackChunkName: "pages_my-doctor-ssr_h5_focus-doctor_index" */))
 const _316a01ce = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 Vue.use(Router)
@@ -89,6 +90,10 @@ export function createRouter() {
       path: "/my-doctor-ssr/h5/doctor-phone-service",
       component: _6325627e,
       name: "my-doctor-ssr-h5-doctor-phone-service"
+    }, {
+      path: "/my-doctor-ssr/h5/focus-doctor",
+      component: _6a5ba3b5,
+      name: "my-doctor-ssr-h5-focus-doctor"
     }, {
       path: "/",
       component: _316a01ce,

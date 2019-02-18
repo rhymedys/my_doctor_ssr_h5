@@ -124,6 +124,10 @@ export default {
       )
     }
   },
+  beforeDestroy() {
+    // eslint-disable-next-line no-console
+    console.log('doctor-index beforeDestroy', this)
+  },
   methods: {
     onTagClick() {
       this.$pushRouter({

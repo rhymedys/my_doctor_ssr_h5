@@ -70,6 +70,9 @@ module.exports = {
     },
     '@/plugins/request.js'
   ],
+  router: {
+    middleware: 'router'
+  },
 
   /*
    ** Nuxt.js modules
