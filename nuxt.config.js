@@ -1,3 +1,5 @@
+// const path = require('path')
+// const vuxLoader = require('vux-loader')
 const pkg = require('./package')
 
 module.exports = {
@@ -64,14 +66,26 @@ module.exports = {
    */
   plugins: [
     '@/plugins/utils/base.js',
+    '@/plugins/request.js',
     {
       src: '@/plugins/utils/client.js',
       ssr: false
     },
-    '@/plugins/request.js'
+    {
+      src: '@/plugins/directive/ccscroll/index.js',
+      ssr: false
+    }
+    // {
+    //   src: '~/plugins/vux-plugins',
+    //   ssr: false
+    // },
+    // {
+    //   src: '~/plugins/vux-components',
+    //   ssr: true
+    // }
   ],
   router: {
-    middleware: 'router'
+    // middleware: 'router'
   },
 
   /*
@@ -111,6 +125,21 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+
+      // const configs = vuxLoader.merge(config, {
+      //   options: {
+      //     ssr: true
+      //   },
+      //   plugins: [
+      //     'vux-ui'
+      //     // {
+      //     //   name: 'less-theme',
+      //     //   path: path.join(__dirname, './styles/theme.less')
+      //     // }
+      //   ]
+      // })
+
+      // return configs
     }
   }
 }

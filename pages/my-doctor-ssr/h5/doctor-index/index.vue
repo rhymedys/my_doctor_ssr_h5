@@ -1,5 +1,5 @@
 <template>
-  <div class="doctor-index">
+  <div v-ccscroll="loadMore" class="doctor-index">
     <section v-if="computeShowContent">
       <doctor-header
         :doctor-index-info="computeDoctorIndexInfo"
@@ -169,6 +169,10 @@ export default {
           }
         })
       }
+    },
+    loadMore() {
+      // eslint-disable-next-line no-console
+      console.log('loadMore')
     }
   }
 }

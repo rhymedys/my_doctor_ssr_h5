@@ -14,8 +14,9 @@ import nuxt_plugin_swregister_719d8582 from 'nuxt_plugin_swregister_719d8582' //
 import nuxt_plugin_nuxticons_4a24638f from 'nuxt_plugin_nuxticons_4a24638f' // Source: ./nuxt-icons.js (mode: 'all')
 import nuxt_plugin_axios_2baf3559 from 'nuxt_plugin_axios_2baf3559' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_base_2b6f98b4 from 'nuxt_plugin_base_2b6f98b4' // Source: ..\\plugins\\utils\\base.js (mode: 'all')
-import nuxt_plugin_client_0b68bdfa from 'nuxt_plugin_client_0b68bdfa' // Source: ..\\plugins\\utils\\client.js (mode: 'client')
 import nuxt_plugin_request_735f5dfc from 'nuxt_plugin_request_735f5dfc' // Source: ..\\plugins\\request.js (mode: 'all')
+import nuxt_plugin_client_0b68bdfa from 'nuxt_plugin_client_0b68bdfa' // Source: ..\\plugins\\utils\\client.js (mode: 'client')
+import nuxt_plugin_index_1ed96853 from 'nuxt_plugin_index_1ed96853' // Source: ..\\plugins\\directive\\ccscroll\\index.js (mode: 'client')
 
 // Component: <NoSsr>
 Vue.component(NoSsr.name, NoSsr)
@@ -141,6 +142,7 @@ async function createApp(ssrContext) {
   if (process.client) {
     if (typeof nuxt_plugin_swregister_719d8582 === 'function') await nuxt_plugin_swregister_719d8582(app.context, inject)
     if (typeof nuxt_plugin_client_0b68bdfa === 'function') await nuxt_plugin_client_0b68bdfa(app.context, inject)
+    if (typeof nuxt_plugin_index_1ed96853 === 'function') await nuxt_plugin_index_1ed96853(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first
