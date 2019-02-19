@@ -23,7 +23,7 @@
       >
         <comment-list :list="computeDoctorIndexInfo.commentItemInfos" />
       </common-list-section>
-    </section>
+</section>
   </div>
 </template>
 
