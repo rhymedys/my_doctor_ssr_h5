@@ -1,5 +1,9 @@
 <template>
-  <div v-ccscroll="loadMore" class="doctor-index">
+  <div
+    ref="loadMoreDiv"
+    v-ccscroll="loadMore"
+    class="doctor-index"
+  >
     <section v-if="computeShowContent">
       <doctor-header
         :doctor-index-info="computeDoctorIndexInfo"
@@ -23,7 +27,11 @@
       >
         <comment-list :list="computeDoctorIndexInfo.commentItemInfos" />
       </common-list-section>
-</section>
+      <page-loading
+        :txt="computePageLodingTxt"
+        :hide-loading="allLoaded"
+      />
+    </section>
   </div>
 </template>
 
@@ -35,6 +43,9 @@ import {
   imgTextConsultId,
   phoneConsultId
 } from '@/constants/serviceType'
+
+import { defPageSize, defInfiniteScollDistance } from '@/config'
+
 export default {
   name: 'DoctorIndex',
   components: {
@@ -42,7 +53,8 @@ export default {
     ServiceTable: () => import('@/components/service-table'),
     CommonListSection: () => import('@/components/common-list-section'),
     CourseList: () => import('@/components/course-list'),
-    CommentList: () => import('@/components/comment-list')
+    CommentList: () => import('@/components/comment-list'),
+    PageLoading: () => import('@/components/page-loading')
   },
   async asyncData(ctx) {
     const { app, query } = ctx
@@ -51,7 +63,13 @@ export default {
     const startDate = new Date().getTime()
     const getDoctorIndexReq = $requestApiWithCookie(ctx, {
       url: 'doctor/getDoctorIndex',
-      params: query
+      params: Object.assign(
+        {
+          page: 1,
+          pageSize: defPageSize
+        },
+        query
+      )
     }).catch(e => {
       return {}
     })
@@ -72,17 +90,36 @@ export default {
     // eslint-disable-next-line no-console
     console.log('asyncData finish time:', new Date().getTime())
     const endDate = new Date().getTime()
+
+    let allLoaded
+
+    if (
+      (allLoaded = getDoctorIndexRes.data.doctorIndexInfo) &&
+      (allLoaded = allLoaded.commentItemInfos)
+    ) {
+      allLoaded = allLoaded.length < defPageSize
+    }
+
     return {
       startDate,
       endDate,
+      allLoaded,
+      loadingMore: false,
       getDoctorIndexRes: getDoctorIndexRes.data,
-      recommendProductsRes: recommendProductsRes.data
+      recommendProductsRes: recommendProductsRes.data,
+      hadLoadInitData: true,
+      page: 2
     }
   },
   data() {
     return {
       getDoctorIndexRes: undefined,
-      recommendProductsRes: undefined
+      recommendProductsRes: undefined,
+
+      hadLoadInitData: false,
+      page: 1,
+      allLoaded: false,
+      loadingMore: true
     }
   },
   computed: {
@@ -122,6 +159,10 @@ export default {
         !computeDoctorIndexInfo.commentItemInfos ||
         !computeDoctorIndexInfo.commentItemInfos.length
       )
+    },
+
+    computePageLodingTxt() {
+      return this.allLoaded ? '>_<  到底啦，别拉了~' : ''
     }
   },
   beforeDestroy() {
@@ -170,9 +211,47 @@ export default {
         })
       }
     },
-    loadMore() {
+    async loadMore() {
       // eslint-disable-next-line no-console
       console.log('loadMore')
+
+      const diffHeight =
+        this.$refs.loadMoreDiv.scrollHeight -
+        window.innerHeight -
+        window.scrollY
+
+      const {
+        allLoaded,
+        hadLoadInitData,
+        loadingMore,
+        page,
+        $getRouteQuery
+      } = this
+
+      if (
+        diffHeight < defInfiniteScollDistance &&
+        !allLoaded &&
+        hadLoadInitData &&
+        !loadingMore
+      ) {
+        const res = await this.$requestApiWithCookie({
+          url: 'doctor/getDoctorComments',
+          params: Object.assign({
+            ...$getRouteQuery(),
+            page,
+            commentCategory: 'CONSULTEVALUATE'
+          })
+        })
+
+        const { resultCode, commentInfos } = res.data
+
+        if (resultCode === 0) {
+          this.allLoaded = commentInfos && commentInfos.length < defPageSize
+          this.page += 1
+          this.getDoctorIndexRes.data.commentItemInfos.concat(commentInfos)
+          this.loadingMore = false
+        }
+      }
     }
   }
 }

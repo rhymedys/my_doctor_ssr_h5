@@ -2,7 +2,7 @@
  * @Author: Rhymedys/Rhymedys@gmail.com
  * @Date: 2019-02-15 14:20:29
  * @Last Modified by: Rhymedys
- * @Last Modified time: 2019-02-15 21:41:55
+ * @Last Modified time: 2019-02-20 16:00:19
  */
 
 import Vue from 'vue'
@@ -15,9 +15,9 @@ const api = {
   $getRouteQuery(key, defVal) {
     let res
     if (key) {
-      res = this.$route.query[key] || defVal
+      res = this.router.currentRoute.query[key] || defVal
     } else {
-      res = this.$route.query
+      res = this.router.currentRoute.query
     }
 
     return res
@@ -37,12 +37,26 @@ const api = {
       res.name = this.$generateWholeName(res.name)
     }
 
-    this.$router.push(res)
+    this.router.push(res)
   }
 }
 
-for (const key in api) {
-  if (!Object.prototype.hasOwnProperty.call(Vue, key)) {
-    Vue.prototype[key] = api[key]
+export default function({ app }, inject) {
+  for (const key in api) {
+    const fn = api[key].bind(app)
+
+    if (!Object.prototype.hasOwnProperty.call(Vue, key)) {
+      Vue.prototype[key] = fn
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(app, key)) {
+      app[key] = fn
+    }
   }
 }
+
+// for (const key in api) {
+//   if (!Object.prototype.hasOwnProperty.call(Vue, key)) {
+//     Vue.prototype[key] = api[key]
+//   }
+// }
