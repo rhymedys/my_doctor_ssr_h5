@@ -64,9 +64,12 @@ export default {
 
     const phoneConsultIndex = await $requestApiWithCookie(ctx, {
       url: 'phoneConsult/index',
-      params: Object.assign(query, {
-        serviceId: query.servceId
-      })
+      params: Object.assign(
+        {
+          serviceId: query.servceId
+        },
+        query
+      )
     }).catch(e => {
       return {}
     })
