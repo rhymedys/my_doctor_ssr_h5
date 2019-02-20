@@ -238,6 +238,7 @@ export default {
           params: Object.assign({
             ...$getRouteQuery(),
             page,
+            pageSize: defPageSize,
             commentCategory: 'CONSULTEVALUATE'
           })
         })
