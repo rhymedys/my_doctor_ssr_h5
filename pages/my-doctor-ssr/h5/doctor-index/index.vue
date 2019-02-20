@@ -212,9 +212,6 @@ export default {
       }
     },
     async loadMore() {
-      // eslint-disable-next-line no-console
-      console.log('loadMore')
-
       const diffHeight =
         this.$refs.loadMoreDiv.scrollHeight -
         window.innerHeight -
