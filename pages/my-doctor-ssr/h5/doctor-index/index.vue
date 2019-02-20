@@ -231,7 +231,9 @@ export default {
         hadLoadInitData &&
         !loadingMore
       ) {
-        const res = await this.$requestApiWithCookie({
+        this.loadingMore = true
+
+        const res = await this.$requestApi({
           url: 'doctor/getDoctorComments',
           params: Object.assign({
             ...$getRouteQuery(),
@@ -240,12 +242,15 @@ export default {
           })
         })
 
-        const { resultCode, commentInfos } = res.data
+        const { resultCode, data } = res.data
 
         if (resultCode === 0) {
-          this.allLoaded = commentInfos && commentInfos.length < defPageSize
+          this.allLoaded =
+            data.commentInfos && data.commentInfos.length < defPageSize
           this.page += 1
-          this.getDoctorIndexRes.data.commentItemInfos.concat(commentInfos)
+          this.getDoctorIndexRes.data.doctorIndexInfo.commentItemInfos = this.getDoctorIndexRes.data.doctorIndexInfo.commentItemInfos.concat(
+            data.commentInfos
+          )
           this.loadingMore = false
         }
       }
