@@ -94,7 +94,7 @@ export default {
     let allLoaded
 
     if (
-      (allLoaded = getDoctorIndexRes.data.doctorIndexInfo) &&
+      (allLoaded = getDoctorIndexRes.data.data.doctorIndexInfo) &&
       (allLoaded = allLoaded.commentItemInfos)
     ) {
       allLoaded = allLoaded.length < defPageSize

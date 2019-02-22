@@ -88,7 +88,7 @@ export default {
     let allLoaded
 
     if (
-      (allLoaded = getDoctorConsltIndexRes.data.doctorConsultIndexInfo) &&
+      (allLoaded = getDoctorConsltIndexRes.data.data.doctorConsultIndexInfo) &&
       (allLoaded = allLoaded.commentItemInfos)
     ) {
       allLoaded = allLoaded.length < defPageSize
