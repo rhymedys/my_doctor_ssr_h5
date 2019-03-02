@@ -84,8 +84,10 @@ export default {
       recommendProductsReq
     ])
 
-    $checkSessionIsOverdue(ctx, getDoctorIndexRes.data)
-    $checkSessionIsOverdue(ctx, recommendProductsRes.data)
+    await Promise.all([
+      $checkSessionIsOverdue(ctx, getDoctorIndexRes.data),
+      $checkSessionIsOverdue(ctx, recommendProductsRes.data)
+    ])
 
     // eslint-disable-next-line no-console
     console.log('asyncData finish time:', new Date().getTime())

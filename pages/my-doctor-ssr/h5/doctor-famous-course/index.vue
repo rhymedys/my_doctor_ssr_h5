@@ -68,8 +68,10 @@ export default {
       listDoctorProductReq
     ])
 
-    $checkSessionIsOverdue(ctx, getDoctorVoiceIndexRes.data)
-    $checkSessionIsOverdue(ctx, listDoctorProductRes.data)
+    await Promise.all([
+      $checkSessionIsOverdue(ctx, getDoctorVoiceIndexRes.data),
+      $checkSessionIsOverdue(ctx, listDoctorProductRes.data)
+    ])
 
     return {
       getDoctorVoiceIndex: getDoctorVoiceIndexRes.data,

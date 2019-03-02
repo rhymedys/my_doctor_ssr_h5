@@ -78,7 +78,7 @@ export default {
       return {}
     })
 
-    $checkSessionIsOverdue(ctx, res.data)
+    await $checkSessionIsOverdue(ctx, res.data)
 
     return {
       getDoctorDetailRes: res.data

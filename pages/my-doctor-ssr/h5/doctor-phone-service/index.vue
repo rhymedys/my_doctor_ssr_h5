@@ -82,7 +82,7 @@ export default {
       return {}
     })
 
-    $checkSessionIsOverdue(ctx, phoneConsultIndex.data)
+    await $checkSessionIsOverdue(ctx, phoneConsultIndex.data)
 
     let allLoaded
 

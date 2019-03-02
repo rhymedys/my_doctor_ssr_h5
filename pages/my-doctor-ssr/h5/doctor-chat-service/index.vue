@@ -83,7 +83,7 @@ export default {
       return {}
     })
 
-    $checkSessionIsOverdue(ctx, getDoctorConsltIndexRes.data)
+    await $checkSessionIsOverdue(ctx, getDoctorConsltIndexRes.data)
 
     let allLoaded
 
