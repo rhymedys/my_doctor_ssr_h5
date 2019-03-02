@@ -2,7 +2,7 @@
  * @Author: Rhymedys/Rhymedys@gmail.com
  * @Date: 2019-02-15 17:39:23
  * @Last Modified by: Rhymedys
- * @Last Modified time: 2019-03-02 12:57:26
+ * @Last Modified time: 2019-03-02 13:03:10
  */
 
 import Vue from 'vue'
@@ -18,9 +18,6 @@ const api = {
       } else if (Object.prototype.toString.call(obj) === '[object Object]') {
         resultCode = obj.resultCode
       }
-
-      // eslint-disable-next-line no-console
-      console.log('resultCode', resultCode)
 
       if (
         resultCode === 410001 ||
