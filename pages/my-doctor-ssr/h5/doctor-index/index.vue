@@ -90,7 +90,11 @@ export default {
     ])
 
     // eslint-disable-next-line no-console
-    console.log('asyncData finish time:', new Date().getTime())
+    console.log(
+      'asyncData finish time:',
+      new Date().getTime(),
+      getDoctorIndexRes
+    )
     const endDate = new Date().getTime()
 
     let allLoaded

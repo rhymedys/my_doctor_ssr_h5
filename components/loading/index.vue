@@ -31,8 +31,6 @@ export default {
   }),
   methods: {
     start() {
-      // eslint-disable-next-line no-console
-      console.log('showLoading')
       this.loading = true
     },
     finish() {

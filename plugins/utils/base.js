@@ -2,7 +2,7 @@
  * @Author: Rhymedys/Rhymedys@gmail.com
  * @Date: 2019-02-15 17:39:23
  * @Last Modified by: Rhymedys
- * @Last Modified time: 2019-03-02 12:14:34
+ * @Last Modified time: 2019-03-02 12:34:16
  */
 
 import Vue from 'vue'
@@ -17,12 +17,13 @@ const api = {
         resultCode = obj
       } else if (Object.prototype.toString.call(obj) === '[object Object]') {
         resultCode = obj.resultCode
+      } else {
       }
 
-      // // eslint-disable-next-line no-console
-      // console.log(obj, resultCode, ctx.route.fullPath)
+      //  eslint-disable-next-line no-console
+      console.log(obj, resultCode, ctx.route.fullPath)
 
-      if (resultCode === 410001) {
+      if (resultCode === 410001 || !resultCode) {
         let redirectUri
         if (process.server) {
           redirectUri = `http://${
